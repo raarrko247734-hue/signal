@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигнал — рабочее место ответственного</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('signal.theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="header"></div>
+    <main class="app-main">
+      <h1 class="page-title">Рабочее место ответственного</h1>
+      <p class="page-sub">Рассматривайте обращения, меняйте статус, запрашивайте уточнения, передавайте коллегам.</p>
+
+      <div class="manager-overview" id="manager-kpis"></div>
+
+      <div class="similar-block" id="similar-block" style="display:none">
+        <h3 class="section-title" style="margin:0 0 6px">Повторяющиеся проблемы</h3>
+        <p class="muted" style="font-size:13px">Категории, где скопилось несколько проблем. Возможно, стоит системное улучшение.</p>
+        <div class="similar-list" id="similar-list"></div>
+      </div>
+
+      <div id="manager-board"></div>
+    </main>
+    <footer class="app-footer" id="footer"></footer>
+  </div>
+  <script defer src="js/seed.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/kanban.js"></script>
+  <script defer src="js/manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигнал — консоль администратора</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('signal.theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="header"></div>
+    <main class="app-main">
+      <h1 class="page-title">Консоль администратора</h1>
+      <p class="page-sub">Управление обращениями, маршрутизацией, ответственными, сроками и правами.</p>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="board">Доска</button>
+        <button class="admin-tab" data-tab="analytics">Аналитика</button>
+        <button class="admin-tab" data-tab="routing">Маршрутизация</button>
+        <button class="admin-tab" data-tab="assignees">Ответственные</button>
+        <button class="admin-tab" data-tab="sla">Сроки</button>
+        <button class="admin-tab" data-tab="perms">Права доступа</button>
+        <button class="admin-tab" data-tab="integrations">Интеграции (план)</button>
+        <button class="admin-tab" data-tab="data">Данные</button>
+      </div>
+      <div id="tab-board" class="admin-pane"><div id="admin-board"></div></div>
+      <div id="tab-analytics" class="admin-pane" style="display:none"></div>
+      <div id="tab-routing" class="admin-pane" style="display:none"></div>
+      <div id="tab-assignees" class="admin-pane" style="display:none"></div>
+      <div id="tab-sla" class="admin-pane" style="display:none"></div>
+      <div id="tab-perms" class="admin-pane" style="display:none"></div>
+      <div id="tab-integrations" class="admin-pane" style="display:none"></div>
+      <div id="tab-data" class="admin-pane" style="display:none"></div>
+    </main>
+    <footer class="app-footer" id="footer"></footer>
+  </div>
+  <script defer src="js/seed.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/kanban.js"></script>
+  <script defer src="js/admin.js"></script>
+</body>
+</html>

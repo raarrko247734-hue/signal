@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигнал — моё рабочее место</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('signal.theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <div class="app-shell">
+    <div id="header"></div>
+    <main class="app-main">
+      <h1 class="page-title">Моё рабочее место</h1>
+      <p class="page-sub">Подавайте обращения, следите за статусом и отвечайте на уточнения ответственных.</p>
+      <div class="emp-tabs">
+        <button class="emp-tab active" data-tab="form">Подать обращение</button>
+        <button class="emp-tab" data-tab="mine">Мои обращения</button>
+        <button class="emp-tab" data-tab="improved">Что уже улучшено</button>
+      </div>
+      <div id="tab-form" class="emp-tab-pane">
+        <div class="emp-grid">
+          <div class="section">
+            <h2 class="section-title"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>Новое обращение</h2>
+            <div id="form-error-box" class="form-error-box" style="display:none"></div>
+            <form id="ticket-form" novalidate></form>
+          </div>
+          <div class="section">
+            <h2 class="section-title">Подсказка</h2>
+            <p class="muted" style="font-size:13px;line-height:1.6">
+              Опишите ситуацию предметно: что происходит, на каком этапе, чего не хватает. Так ответственный быстрее поймёт и примет решение.<br><br>
+              Предложения с конкретным решением рассматриваются быстрее.<br><br>
+              Анонимность не влияет на рассмотрение — она нужна, чтобы смело сообщать о сложностях.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="tab-mine" class="emp-tab-pane" style="display:none">
+        <div class="filter-chips" id="my-filters"></div>
+        <div id="my-board"></div>
+        <h2 class="section-title" style="margin:24px 0 10px">Список обращений</h2>
+        <div class="my-list" id="my-list"></div>
+      </div>
+      <div id="tab-improved" class="emp-tab-pane" style="display:none">
+        <div class="section">
+          <h2 class="section-title">Что уже улучшено</h2>
+          <p class="muted" style="font-size:13px;margin-bottom:14px">Реализованные предложения, которые ответственные пометили как публичные. Без имён авторов.</p>
+          <div class="improved-list" id="improved-list"></div>
+        </div>
+      </div>
+    </main>
+    <footer class="app-footer" id="footer"></footer>
+  </div>
+  <script defer src="js/seed.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/kanban.js"></script>
+  <script defer src="js/employee.js"></script>
+</body>
+</html>

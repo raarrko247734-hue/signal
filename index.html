@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигнал — вход</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var t=localStorage.getItem('signal.theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body class="auth-body">
+  <main class="auth-page" id="auth-page">
+    <!-- Левая колонка: форма -->
+    <section class="auth-form-col" aria-label="Форма входа">
+      <div class="auth-form-wrap">
+        <a href="index.html" class="auth-brand" aria-label="Сигнал">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="M17 20.7 A10 10 0 1 1 17 3.3"/><path d="M15.5 18.1 A7 7 0 1 1 15.5 5.9"/><path d="M14.2 15.8 A4.4 4.4 0 1 1 14.2 8.2"/><circle cx="12" cy="12" r="1.7" fill="#F05A28" stroke="none"/></svg></span>
+          <span class="auth-brand-name">Сигнал</span>
+        </a>
+
+        <!-- Режим: вход -->
+        <div class="auth-mode" data-mode="login">
+          <h1 class="auth-title">Вход в систему</h1>
+          <p class="auth-subtitle">Войдите, чтобы подавать обращения и следить за их статусом.</p>
+
+          <div class="auth-error-box" id="login-form-error" style="display:none" role="alert"></div>
+
+          <form id="login-form" novalidate>
+            <div class="auth-field">
+              <label class="form-label" for="login-email">Рабочий email</label>
+              <input id="login-email" class="form-control" type="email" autocomplete="email" placeholder="ivanov@modus.ru" aria-describedby="login-email-error">
+              <p class="field-error" id="login-email-error" style="display:none" role="alert"></p>
+            </div>
+
+            <div class="auth-field">
+              <div class="auth-label-row">
+                <label class="form-label" for="login-password">Пароль</label>
+                <span class="auth-demo-hint">Демо-пароль: <button type="button" class="link-btn" id="demo-pw-hint">demo1234</button></span>
+              </div>
+              <div class="input-with-action">
+                <input id="login-password" class="form-control" type="password" autocomplete="current-password" placeholder="Введите пароль" aria-describedby="login-password-error">
+                <button type="button" class="input-action" id="login-pw-toggle" aria-label="Показать пароль" aria-pressed="false">
+                  <svg class="pw-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="pw-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <p class="field-error" id="login-password-error" style="display:none" role="alert"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block auth-submit" id="login-submit">
+              <span class="btn-label">Войти</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>или</span></div>
+
+          <div class="auth-demo-block">
+            <p class="auth-demo-title">Быстрый вход в демо-режиме<br><span class="muted">выберите пользователя, пароль подставится автоматически</span></p>
+            <div class="auth-demo-buttons">
+              <div class="demo-select-group">
+                <label class="demo-select-label" for="demo-employee">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span>Сотрудник</span>
+                </label>
+                <select id="demo-employee" class="form-control demo-select" aria-label="Быстрый вход сотрудником"></select>
+              </div>
+              <div class="demo-select-group">
+                <label class="demo-select-label" for="demo-manager">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v7h6"/><path d="M15 11h4a2 2 0 0 1 2 2v7h-6"/><circle cx="12" cy="5" r="3"/></svg>
+                  <span>Руководитель</span>
+                </label>
+                <select id="demo-manager" class="form-control demo-select" aria-label="Быстрый вход руководителем"></select>
+              </div>
+              <div class="demo-select-group">
+                <label class="demo-select-label" for="demo-admin">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  <span>Администратор</span>
+                </label>
+                <button type="button" class="demo-select demo-admin-btn" id="demo-admin" data-email="admin@modus.ru">Администратор системы</button>
+              </div>
+            </div>
+          </div>
+
+          <p class="auth-switch">Нет учётной записи? <button type="button" class="link-btn auth-switch-link" data-switch="register">Зарегистрируйтесь</button></p>
+        </div>
+
+        <!-- Режим: регистрация -->
+        <div class="auth-mode" data-mode="register" style="display:none">
+          <h1 class="auth-title">Регистрация</h1>
+          <p class="auth-subtitle">Создайте учётную запись сотрудника, чтобы подавать обращения.</p>
+
+          <div class="auth-error-box" id="register-form-error" style="display:none" role="alert"></div>
+
+          <form id="register-form" novalidate>
+            <div class="auth-field">
+              <label class="form-label" for="reg-name">Имя и фамилия</label>
+              <input id="reg-name" class="form-control" type="text" autocomplete="name" placeholder="Иван Иванов" aria-describedby="reg-name-error">
+              <p class="field-error" id="reg-name-error" style="display:none" role="alert"></p>
+            </div>
+
+            <div class="auth-field">
+              <label class="form-label" for="reg-email">Рабочий email</label>
+              <input id="reg-email" class="form-control" type="email" autocomplete="email" placeholder="ivanov@modus.ru" aria-describedby="reg-email-error">
+              <p class="field-error" id="reg-email-error" style="display:none" role="alert"></p>
+            </div>
+
+            <div class="auth-field">
+              <label class="form-label" for="reg-password">Пароль</label>
+              <div class="input-with-action">
+                <input id="reg-password" class="form-control" type="password" autocomplete="new-password" placeholder="Минимум 8 символов" aria-describedby="reg-password-error reg-password-hint">
+                <button type="button" class="input-action" id="reg-pw-toggle" aria-label="Показать пароль" aria-pressed="false">
+                  <svg class="pw-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="pw-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <p class="form-hint" id="reg-password-hint">Не менее 8 символов. Не используйте корпоративные пароли.</p>
+              <p class="field-error" id="reg-password-error" style="display:none" role="alert"></p>
+            </div>
+
+            <div class="auth-field">
+              <label class="form-label" for="reg-password2">Подтвердите пароль</label>
+              <input id="reg-password2" class="form-control" type="password" autocomplete="new-password" placeholder="Повторите пароль" aria-describedby="reg-password2-error">
+              <p class="field-error" id="reg-password2-error" style="display:none" role="alert"></p>
+            </div>
+
+            <div class="auth-field auth-consent">
+              <label class="check-line">
+                <input type="checkbox" id="reg-agree">
+                <span>Я согласен(на) с обработкой моих обращений и не указываю коммерческие условия клиентов и персональные данные<span class="req">*</span></span>
+              </label>
+              <p class="field-error" id="reg-agree-error" style="display:none" role="alert"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block auth-submit" id="register-submit">
+              <span class="btn-label">Зарегистрироваться</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <p class="auth-switch">Уже есть аккаунт? <button type="button" class="link-btn auth-switch-link" data-switch="login">Войти</button></p>
+        </div>
+
+        <p class="auth-footnote">© 2026 ГК «Модус Трейд» · внутренний контур компании</p>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="js/seed.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict';
+      const S = window.Store;
+      const UI = window.UI;
+
+      // Уже вошёл — сразу на свою страницу
+      const existing = S.getSession();
+      if (existing) {
+        const page = { employee: 'employee.html', manager: 'manager.html', admin: 'admin.html' }[existing.role];
+        if (page) { window.location.href = page; return; }
+      }
+
+      let mode = 'login';
+
+      // ---------- Переключение режимов ----------
+      document.querySelectorAll('.auth-switch-link').forEach(btn => {
+        btn.addEventListener('click', () => switchMode(btn.getAttribute('data-switch')));
+      });
+      function switchMode(m) {
+        mode = m;
+        document.querySelectorAll('.auth-mode').forEach(el => el.style.display = el.getAttribute('data-mode') === m ? '' : 'none');
+        document.getElementById('login-form-error').style.display = 'none';
+        document.getElementById('register-form-error').style.display = 'none';
+      }
+      // сразу скрыть register (до показа формы), чтобы не мелькал
+      switchMode('login');
+
+      // ---------- Переключатели пароля ----------
+      function bindPwToggle(toggleId, inputId) {
+        const btn = document.getElementById(toggleId);
+        const inp = document.getElementById(inputId);
+        const eye = btn.querySelector('.pw-eye');
+        const eyeOff = btn.querySelector('.pw-eye-off');
+        btn.addEventListener('click', () => {
+          const show = inp.type === 'password';
+          inp.type = show ? 'text' : 'password';
+          btn.setAttribute('aria-pressed', String(show));
+          btn.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+          eye.style.display = show ? 'none' : '';
+          eyeOff.style.display = show ? '' : 'none';
+          inp.focus();
+        });
+      }
+      bindPwToggle('login-pw-toggle', 'login-password');
+      bindPwToggle('reg-pw-toggle', 'reg-password');
+
+      // ---------- Подстановка демо-пароля по клику на подсказку ----------
+      document.getElementById('demo-pw-hint').addEventListener('click', () => {
+        const pw = document.getElementById('login-password');
+        pw.value = S.getDemoPassword();
+        clearFieldError('login-password');
+        pw.focus();
+      });
+
+      // ---------- Валидация: хелперы ----------
+      function setFieldError(inputId, msg) {
+        const el = document.getElementById(inputId);
+        const errId = inputId + '-error';
+        const err = document.getElementById(errId);
+        if (!el) return;
+        el.classList.add('invalid');
+        el.setAttribute('aria-invalid', 'true');
+        el.setAttribute('aria-describedby', errId);
+        if (err) { err.textContent = msg; err.style.display = 'block'; }
+      }
+      function clearFieldError(inputId) {
+        const el = document.getElementById(inputId);
+        const errId = inputId + '-error';
+        const err = document.getElementById(errId);
+        if (!el) return;
+        el.classList.remove('invalid');
+        el.removeAttribute('aria-invalid');
+        if (err) { err.textContent = ''; err.style.display = 'none'; }
+      }
+
+      // валидация на blur и снятие ошибки на input
+      function bindField(inputId, validateFn) {
+        const el = document.getElementById(inputId);
+        if (!el) return;
+        el.addEventListener('blur', () => {
+          const e = validateFn();
+          if (e) setFieldError(inputId, e); else clearFieldError(inputId);
+        });
+        el.addEventListener('input', () => {
+          if (el.getAttribute('aria-invalid') === 'true') {
+            const e = validateFn();
+            if (!e) clearFieldError(inputId);
+          }
+        });
+      }
+
+      // ---------- Вход: правила ----------
+      const vEmail = () => {
+        const v = document.getElementById('login-email').value.trim();
+        if (!v) return 'Введите email';
+        if (!S.isValidEmail(v)) return 'Некорректный формат email';
+        return null;
+      };
+      const vPw = () => {
+        const v = document.getElementById('login-password').value;
+        if (!v) return 'Введите пароль';
+        if (v.length < 8) return 'Минимум 8 символов';
+        return null;
+      };
+      bindField('login-email', vEmail);
+      bindField('login-password', vPw);
+
+      // ---------- Регистрация: правила ----------
+      const vName = () => {
+        const v = document.getElementById('reg-name').value.trim();
+        if (!v) return 'Введите имя и фамилию';
+        if (v.length < 2) return 'Минимум 2 символа';
+        if (v.length > 60) return 'Не более 60 символов';
+        if (!/[а-яёa-z]/i.test(v)) return 'Имя должно содержать буквы';
+        return null;
+      };
+      const vRegEmail = () => {
+        const v = document.getElementById('reg-email').value.trim();
+        if (!v) return 'Введите email';
+        if (!S.isValidEmail(v)) return 'Некорректный формат email';
+        return null;
+      };
+      const vRegPw = () => {
+        const v = document.getElementById('reg-password').value;
+        if (!v) return 'Придумайте пароль';
+        if (v.length < 8) return 'Минимум 8 символов';
+        if (v.length > 64) return 'Не более 64 символов';
+        return null;
+      };
+      const vRegPw2 = () => {
+        const v = document.getElementById('reg-password2').value;
+        const v1 = document.getElementById('reg-password').value;
+        if (!v) return 'Подтвердите пароль';
+        if (v !== v1) return 'Пароли не совпадают';
+        return null;
+      };
+      const vAgree = () => {
+        if (!document.getElementById('reg-agree').checked) return 'Необходимо принять условия';
+        return null;
+      };
+      bindField('reg-name', vName);
+      bindField('reg-email', vRegEmail);
+      bindField('reg-password', vRegPw);
+      bindField('reg-password2', vRegPw2);
+      document.getElementById('reg-agree').addEventListener('change', () => clearFieldError('reg-agree'));
+      // повторная проверка подтверждения при изменении первого пароля
+      document.getElementById('reg-password').addEventListener('input', () => {
+        if (document.getElementById('reg-password2').getAttribute('aria-invalid') === 'true') {
+          const e = vRegPw2(); if (!e) clearFieldError('reg-password2'); else setFieldError('reg-password2', e);
+        }
+      });
+
+      // ---------- Универсальный прогон валидации с блоком ошибок ----------
+      function runValidation(checks, errorBoxId) {
+        const errorBox = document.getElementById(errorBoxId);
+        const errors = [];
+        for (const c of checks) {
+          const e = c.check();
+          if (e) {
+            errors.push({ msg: e, inputId: c.inputId });
+            setFieldError(c.inputId, e);
+          } else {
+            clearFieldError(c.inputId);
+          }
+        }
+        if (errors.length) {
+          errorBox.innerHTML = '<p>Проверьте поля:</p><ul>' + errors.map(x =>
+            '<li><a href="#' + UI.esc(x.inputId) + '" data-focus="' + UI.esc(x.inputId) + '">' + UI.esc(x.msg) + '</a></li>'
+          ).join('') + '</ul>';
+          errorBox.style.display = 'block';
+          errorBox.querySelectorAll('[data-focus]').forEach(a => a.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            const el = document.getElementById(a.getAttribute('data-focus'));
+            if (el) el.focus();
+          }));
+          const first = document.getElementById(errors[0].inputId);
+          if (first) { first.focus(); first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          return false;
+        }
+        errorBox.style.display = 'none';
+        errorBox.innerHTML = '';
+        return true;
+      }
+
+      // ---------- Спиннер на кнопке ----------
+      function setLoading(btnId, loading, label) {
+        const btn = document.getElementById(btnId);
+        btn.disabled = loading;
+        btn.classList.toggle('is-loading', loading);
+        if (label) btn.querySelector('.btn-label').textContent = label;
+      }
+
+      function redirectAfterLogin(role) {
+        const page = { employee: 'employee.html', manager: 'manager.html', admin: 'admin.html' }[role];
+        if (page) window.location.href = page;
+      }
+
+      // ---------- Вход: отправка ----------
+      document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ok = runValidation([
+          { inputId: 'login-email', check: vEmail },
+          { inputId: 'login-password', check: vPw }
+        ], 'login-form-error');
+        if (!ok) return;
+        setLoading('login-submit', true);
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        // имитация запроса
+        setTimeout(() => {
+          const res = S.verifyPassword(email, password);
+          if (!res.ok) {
+            setLoading('login-submit', false);
+            // ошибка привязывается к полю пароля или email
+            if (res.error.indexOf('email') >= 0 || res.error.indexOf('Пользователь') >= 0) {
+              setFieldError('login-email', res.error);
+            } else {
+              setFieldError('login-password', res.error);
+            }
+            const eb = document.getElementById('login-form-error');
+            eb.innerHTML = '<p>Не удалось войти:</p><ul><li>' + UI.esc(res.error) + '</li></ul>';
+            eb.style.display = 'block';
+            return;
+          }
+          S.setSession(res.user.role, res.user.user);
+          setLoading('login-submit', true, 'Вход выполнен…');
+          setTimeout(() => redirectAfterLogin(res.user.role), 250);
+        }, 500);
+      });
+
+      // ---------- Регистрация: отправка ----------
+      document.getElementById('register-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ok = runValidation([
+          { inputId: 'reg-name', check: vName },
+          { inputId: 'reg-email', check: vRegEmail },
+          { inputId: 'reg-password', check: vRegPw },
+          { inputId: 'reg-password2', check: vRegPw2 },
+          { inputId: 'reg-agree', check: vAgree }
+        ], 'register-form-error');
+        if (!ok) return;
+        setLoading('register-submit', true);
+        const data = {
+          name: document.getElementById('reg-name').value,
+          email: document.getElementById('reg-email').value,
+          password: document.getElementById('reg-password').value,
+          agree: document.getElementById('reg-agree').checked
+        };
+        setTimeout(() => {
+          try {
+            const u = S.registerUser(data);
+            S.setSession(u.role, u.user);
+            setLoading('register-submit', true, 'Регистрация выполнена…');
+            setTimeout(() => redirectAfterLogin(u.role), 250);
+          } catch (err) {
+            setLoading('register-submit', false);
+            const msg = err.message || 'Не удалось зарегистрироваться';
+            // привязка ошибки к конкретному полю
+            if (/email|Пользователь/i.test(msg)) setFieldError('reg-email', msg);
+            else if (/парол/i.test(msg)) setFieldError('reg-password', msg);
+            else if (/имя|Имя/i.test(msg)) setFieldError('reg-name', msg);
+            else if (/соглас|услов/i.test(msg)) setFieldError('reg-agree', msg);
+            const eb = document.getElementById('register-form-error');
+            eb.innerHTML = '<p>Не удалось зарегистрироваться:</p><ul><li>' + UI.esc(msg) + '</li></ul>';
+            eb.style.display = 'block';
+          }
+        }, 500);
+      });
+
+      // ---------- Быстрый демо-вход: заполнение списков ----------
+      function buildDemoSelects() {
+        // Сотрудники по отделам
+        const empSel = document.getElementById('demo-employee');
+        const empGroups = S.getEmployeesByDept();
+        let empHtml = '<option value="" disabled selected>— выберите —</option>';
+        for (const g of empGroups) {
+          empHtml += '<optgroup label="' + UI.esc(g.dept) + '">';
+          for (const e of g.employees) {
+            empHtml += '<option value="' + UI.esc(e.email) + '">' + UI.esc(e.name) + '</option>';
+          }
+          empHtml += '</optgroup>';
+        }
+        empSel.innerHTML = empHtml;
+
+        // Руководители по отделам
+        const mgrSel = document.getElementById('demo-manager');
+        const mgrGroups = S.getAssigneesByDept();
+        let mgrHtml = '<option value="" disabled selected>— выберите —</option>';
+        for (const g of mgrGroups) {
+          mgrHtml += '<optgroup label="' + UI.esc(g.dept) + '">';
+          for (const a of g.assignees) {
+            mgrHtml += '<option value="' + UI.esc(a.email) + '">' + UI.esc(a.name) + '</option>';
+          }
+          mgrHtml += '</optgroup>';
+        }
+        mgrSel.innerHTML = mgrHtml;
+      }
+      buildDemoSelects();
+
+      function doDemoLogin(email) {
+        if (!email) return;
+        const password = S.getDemoPassword();
+        document.getElementById('login-email').value = email;
+        document.getElementById('login-password').value = password;
+        clearFieldError('login-email'); clearFieldError('login-password');
+        document.getElementById('login-form-error').style.display = 'none';
+        document.getElementById('login-form').dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+
+      document.getElementById('demo-employee').addEventListener('change', (e) => doDemoLogin(e.target.value));
+      document.getElementById('demo-manager').addEventListener('change', (e) => doDemoLogin(e.target.value));
+      document.getElementById('demo-admin').addEventListener('click', () => doDemoLogin('admin@modus.ru'));
+
+      // показать форму после инициализации (убирает мелькание register)
+      document.getElementById('auth-page').classList.add('is-ready');
+    });
+  </script>
+</body>
+</html>
